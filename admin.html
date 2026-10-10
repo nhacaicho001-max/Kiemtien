@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Quản trị</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f5fb;--card:#fff;--text:#16182a;--muted:#62687d;--line:#e6e8f2;--accent:#6366f1;--accent2:#06b6d4;--danger:#dc2626;--sh:0 1px 2px rgba(20,24,60,.05),0 8px 24px rgba(20,24,60,.07);--shh:0 2px 4px rgba(20,24,60,.06),0 18px 38px rgba(79,70,229,.2);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0d14;--card:#151826;--text:#eef0fa;--muted:#9aa2bb;--line:#262b3d;--accent:#818cf8;--accent2:#22d3ee;--danger:#f87171;--sh:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);--shh:0 2px 4px rgba(0,0,0,.4),0 18px 38px rgba(99,102,241,.28)}}
+:root[data-theme="dark"]{--bg:#0b0d14;--card:#151826;--text:#eef0fa;--muted:#9aa2bb;--line:#262b3d;--accent:#818cf8;--accent2:#22d3ee;--danger:#f87171;--sh:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);--shh:0 2px 4px rgba(0,0,0,.4),0 18px 38px rgba(99,102,241,.28)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(620px 320px at 12% -4%,rgba(99,102,241,.24),transparent 70%),radial-gradient(520px 300px at 92% 0,rgba(6,182,212,.2),transparent 70%)}
+.wrap{max-width:1000px;margin:0 auto;padding:20px 16px 56px}
+header{text-align:center;padding:38px 0 10px}
+h1{font-size:clamp(1.9rem,6vw,3.1rem);font-weight:800;letter-spacing:-.025em;line-height:1.15;margin:0 0 10px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{color:var(--muted);margin:0 auto;max-width:560px;font-size:1.02rem}
+button{font:inherit;cursor:pointer;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);padding:9px 16px;transition:transform .15s,box-shadow .15s,border-color .15s}
+button:hover{border-color:var(--accent)}
+button:active{transform:scale(.97)}
+button.pri{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;font-weight:600;box-shadow:0 6px 16px rgba(99,102,241,.35)}
+button.dng{color:var(--danger);border-color:var(--danger)}
+#bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0;align-items:center}
+#st{color:var(--muted);font-size:.85rem}
+.search input,label input,label textarea{width:100%;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;outline:none;transition:border-color .15s,box-shadow .15s}
+.search input:focus,label input:focus,label textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(99,102,241,.16)}
+.search{margin:20px auto 14px;max-width:560px}
+.search input{border-radius:999px;padding:14px 20px 14px 46px;box-shadow:var(--sh);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%239aa2bb' stroke-width='2' stroke-linecap='round' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:16px center}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;justify-content:center;flex-wrap:wrap}
+.tabs button{flex:none;border-radius:999px;font-size:.9rem;padding:7px 16px}
+.tabs button.on{background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:transparent;color:#fff;font-weight:600}
+h2{font-size:1.2rem;font-weight:700;margin:34px 0 14px}
+h2::before{content:"";display:inline-block;width:6px;height:1.1em;border-radius:3px;background:linear-gradient(var(--accent),var(--accent2));margin-right:10px;vertical-align:-.2em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shh);border-color:var(--accent)}
+.lk{text-decoration:none;color:inherit;display:flex;flex-direction:row-reverse;align-items:stretch;flex:1}
+.im{overflow:hidden;background:var(--line);width:128px;flex:none;aspect-ratio:1/1;align-self:center;margin:14px 14px 14px 0;border-radius:14px}
+.th{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .45s}
+.card:hover .th{transform:scale(1.06)}
+.ph{display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(6,182,212,.18))}
+.bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:5px;flex:1}
+.name{font-weight:700;font-size:1.05rem;line-height:1.3}
+.host{font-size:.75rem;color:var(--muted);letter-spacing:.01em}
+.desc{color:var(--muted);font-size:.9rem;flex:1;white-space:pre-line;margin-top:2px}
+.go{align-self:flex-start;margin-top:10px;padding:7px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;font-size:.85rem;font-weight:700;box-shadow:0 6px 16px rgba(99,102,241,.3);transition:letter-spacing .2s}
+.card:hover .go{letter-spacing:.02em}
+.ed{display:flex;gap:6px;padding:0 16px 14px}
+.ed button{padding:5px 11px;font-size:.8rem}
+.empty{color:var(--muted);text-align:center;padding:56px 10px;font-size:1.02rem}
+.ov{position:fixed;inset:0;background:rgba(10,12,24,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:calc(20px + env(safe-area-inset-top,0px)) 14px 20px;z-index:10}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:22px;width:100%;max-width:470px;display:flex;flex-direction:column;gap:13px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.box h3{margin:0;font-size:1.2rem}
+label{display:flex;flex-direction:column;gap:5px;font-size:.88rem;color:var(--muted)}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+#pv img{width:100%;border-radius:12px;margin-bottom:6px;display:block}
+footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:36px}
+@media (max-width:420px){.im{width:104px}.name{font-size:1rem}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.tip{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:12px 16px;font-size:.9rem;color:var(--muted);margin:10px 0}
+#msg{color:var(--text)}
+.flt{margin:12px 0}
+.rw{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px;margin-bottom:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;box-shadow:var(--sh)}
+.rw .tn{width:60px;height:60px;border-radius:12px;object-fit:cover;background:var(--line);flex:none;display:flex;align-items:center;justify-content:center}
+.mid{flex:1;min-width:150px;display:flex;flex-direction:column}
+.mid small{color:var(--muted)}
+.ac{display:flex;gap:6px;flex-wrap:wrap}
+.ac button{padding:5px 11px;font-size:.82rem}
+.ok{color:#16a34a}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>Quản trị</h1><p id="sub"></p></header>
+<div id="bar"><button class="pri" id="b_save">💾 Lưu lên web</button><button class="pri" id="b_add">➕ Thêm link</button><button id="b_set">⚙️ Tiêu đề trang</button><button id="b_cfg">🔑 Kết nối GitHub</button><button id="b_re">↻ Tải lại từ web</button></div>
+<div class="tip" id="msg"></div>
+<div class="flt"><input id="aq" type="search" placeholder="Tìm trong danh sách..."></div>
+<div id="al"></div>
+<p style="text-align:center"><a href="./" target="_blank" style="color:var(--accent)">Xem trang công khai →</a></p>
+</div>
+<div id="modal"></div>
+<script>
+var S={title:"Kho Link",sub:"",items:[]},sha=null,dirty=false,cfg={owner:"",repo:"",token:""},busy=false;
+var DEF=["Công cụ AI","Kiếm tiền online","Ứng dụng hữu ích"];
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function host(u){try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return ""}}
+function safeImg(u){return /^data:image\/(jpeg|png|webp|gif);base64,[A-Za-z0-9+\/=]+$/.test(u||"")?u:""}
+function cats(){var a=[];S.items.forEach(function(x){if(x.cat&&a.indexOf(x.cat)<0)a.push(x.cat)});return a}
+function msg(t,good){var m=$("msg");m.textContent=t;m.className="tip"+(good?" ok":"")}
+function hasCfg(){return !!(cfg.owner&&cfg.repo&&cfg.token)}
+try{var c0=localStorage.getItem("kt_gh");if(c0)cfg=Object.assign(cfg,JSON.parse(c0))}catch(e){}
+function saveCfg(){try{localStorage.setItem("kt_gh",JSON.stringify(cfg))}catch(e){}}
+function saveDraft(){try{localStorage.setItem("kt_draft",JSON.stringify(S))}catch(e){}}
+function clearDraft(){try{localStorage.removeItem("kt_draft")}catch(e){}}
+function norm(d){d=d||{};return{title:String(d.title||"Kho Link"),sub:String(d.sub||""),items:Array.isArray(d.items)?d.items:[]}}
+function api(path,o){o=o||{};var h={"Accept":o.raw?"application/vnd.github.raw+json":"application/vnd.github+json","Authorization":"Bearer "+cfg.token,"X-GitHub-Api-Version":"2022-11-28"};if(o.body)h["Content-Type"]="application/json";
+return fetch("https://api.github.com/repos/"+encodeURIComponent(cfg.owner)+"/"+encodeURIComponent(cfg.repo)+path,{method:o.method||"GET",headers:h,body:o.body,cache:"no-store"})}
+function apiErr(r){var s=r.status;if(s===401)return"Token sai hoặc đã hết hạn.";if(s===403)return"Token chưa đủ quyền (cần Contents: Read and write) hoặc bị giới hạn tạm thời.";if(s===404)return"Không thấy kho hoặc file data.json. Kiểm tra tên tài khoản, tên kho và quyền của token.";if(s===409||s===422)return"File đã bị đổi ở nơi khác. Bấm “Tải lại từ web” rồi sửa lại.";return"Lỗi GitHub ("+s+")."}
+function b64(s){var b=new TextEncoder().encode(s),o="";for(var i=0;i<b.length;i+=32768)o+=String.fromCharCode.apply(null,b.subarray(i,i+32768));return btoa(o)}
+async function loadRemote(){
+if(!hasCfg()){var r=await fetch("data.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error("Không đọc được data.json ("+r.status+")");S=norm(await r.json());sha=null;return}
+var m=await api("/contents/data.json?t="+Date.now());if(!m.ok)throw new Error(apiErr(m));
+var meta=await m.json();sha=meta.sha;
+var rr=await api("/contents/data.json?t="+Date.now(),{raw:true});if(!rr.ok)throw new Error(apiErr(rr));
+S=norm(JSON.parse(await rr.text()))}
+async function pushRemote(){
+if(busy)return;
+if(!hasCfg()){openCfg();msg("Hãy kết nối GitHub trước (bấm 🔑 Kết nối GitHub).");return}
+busy=true;msg("Đang lưu lên GitHub…");
+try{var body={message:"Cập nhật link từ trang quản trị",content:b64(JSON.stringify(S,null,1))};if(sha)body.sha=sha;
+var r=await api("/contents/data.json",{method:"PUT",body:JSON.stringify(body)});
+if(!r.ok)throw new Error(apiErr(r));
+var j=await r.json();sha=j.content&&j.content.sha||sha;dirty=false;clearDraft();msg("Đã lưu lên GitHub. Web thật sẽ đổi sau vài phút.",true)}
+catch(e){msg("Chưa lưu được: "+(e&&e.message||"lỗi mạng"))}
+busy=false;draw()}
+function changed(){dirty=true;saveDraft();msg("Có thay đổi chưa lưu. Bấm “💾 Lưu lên web” để đăng.");draw()}
+function draw(){$("sub").textContent=S.title+(dirty?" · chưa lưu":"");lst()}
+function lst(){
+var k=$("aq").value.trim().toLowerCase();
+var L=S.items.filter(function(x){return!k||(x.name+" "+x.cat+" "+x.url).toLowerCase().indexOf(k)>-1});
+$("al").innerHTML=L.length?L.map(function(x){var im=safeImg(x.img);return '<div class="rw">'+(im?'<img class="tn" src="'+im+'" alt="">':'<div class="tn">🔗</div>')+'<div class="mid"><b>'+esc(x.name)+'</b><small>'+esc(x.cat||"Khác")+' · '+esc(host(x.url))+'</small></div><div class="ac"><button data-a="e" data-i="'+esc(x.id)+'">✏️ Sửa</button><button data-a="up" data-i="'+esc(x.id)+'">↑</button><button data-a="dn" data-i="'+esc(x.id)+'">↓</button></div></div>'}).join(""):'<div class="tip">Chưa có link nào. Bấm “➕ Thêm link”.</div>'}
+$("aq").oninput=lst;
+$("al").addEventListener("click",function(e){var b=e.target.closest("button[data-a]");if(!b)return;
+var i=S.items.findIndex(function(x){return x.id===b.dataset.i});if(i<0)return;var a=b.dataset.a;
+if(a==="e"){form(S.items[i]);return}
+var j=a==="up"?i-1:i+1;if(j<0||j>=S.items.length)return;var t=S.items[i];S.items[i]=S.items[j];S.items[j]=t;changed()});
+$("b_add").onclick=function(){form()};
+$("b_set").onclick=settings;
+$("b_cfg").onclick=openCfg;
+$("b_save").onclick=pushRemote;
+$("b_re").onclick=function(){if(dirty&&!this.dataset.ar){this.dataset.ar="1";this.textContent="Bấm lần nữa để bỏ thay đổi";return}this.dataset.ar="";this.textContent="↻ Tải lại từ web";clearDraft();dirty=false;msg("Đang tải lại…");loadRemote().then(function(){msg("Đã tải bản mới nhất từ web.",true);draw()}).catch(function(e){msg("Chưa tải được: "+e.message)})};
+function shrink(f,cb){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var w=im.width,h=im.height,k=Math.min(1,600/Math.max(w,h));w=Math.round(w*k)||1;h=Math.round(h*k)||1;var c=document.createElement("canvas");c.width=w;c.height=h;var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);cb(c.toDataURL("image/jpeg",.8))};im.onerror=function(){cb(null)};im.src=r.result};r.onerror=function(){cb(null)};r.readAsDataURL(f)}
+function close(){$("modal").innerHTML=""}
+function form(it){
+var isNew=!it;it=it||{name:"",url:"",desc:"",cat:"",img:""};var img=safeImg(it.img),opts=cats().concat(DEF.filter(function(d){return cats().indexOf(d)<0}));
+$("modal").innerHTML='<div class="ov"><div class="box"><h3>'+(isNew?"Thêm link mới":"Sửa link")+'</h3><label>Tên<input id="f_n" value="'+esc(it.name)+'"></label><label>Link (URL)<input id="f_u" placeholder="https://..." value="'+esc(it.url)+'"></label><label>Mô tả ngắn<textarea id="f_d" rows="3">'+esc(it.desc)+'</textarea></label><label>Nhóm<input id="f_c" list="cl" placeholder="Chọn hoặc gõ nhóm mới" value="'+esc(it.cat)+'"></label><datalist id="cl">'+opts.map(function(o){return '<option value="'+esc(o)+'">'}).join("")+'</datalist><label>Ảnh (tải từ máy)<input id="f_i" type="file" accept="image/*"></label><div id="pv"></div><div id="er" style="color:var(--danger);font-size:.85rem"></div><div class="row"><button class="pri" id="f_ok">Lưu</button><button id="f_no">Hủy</button>'+(isNew?"":'<button class="dng" id="f_del">Xóa</button>')+'</div></div></div>';
+function pv(){$("pv").innerHTML=img?'<img src="'+img+'" alt=""><button id="f_rm">Bỏ ảnh</button>':"";if(img)$("f_rm").onclick=function(){img="";pv()}}
+pv();
+$("f_i").onchange=function(){var f=this.files[0];if(!f)return;$("er").textContent="Đang xử lý ảnh…";shrink(f,function(d){if(d){img=d;$("er").textContent="";pv()}else $("er").textContent="Không đọc được ảnh này."})};
+$("f_no").onclick=close;
+if(!isNew){var armed=false;$("f_del").onclick=function(){if(!armed){armed=true;this.textContent="Bấm lần nữa để xóa";return}S.items=S.items.filter(function(x){return x.id!==it.id});close();changed()}}
+$("f_ok").onclick=function(){var n=$("f_n").value.trim(),u=$("f_u").value.trim();if(!n||!u){$("er").textContent="Cần nhập tên và link.";return}
+if(!/^https?:\/\//i.test(u))u="https://"+u;
+var o={id:it.id||Date.now().toString(36),name:n,url:u,desc:$("f_d").value.trim(),cat:$("f_c").value.trim(),img:img};
+if(isNew)S.items.push(o);else S.items=S.items.map(function(x){return x.id===o.id?o:x});
+close();changed()};
+}
+function settings(){
+$("modal").innerHTML='<div class="ov"><div class="box"><h3>Tiêu đề trang</h3><label>Tiêu đề<input id="s_t" value="'+esc(S.title)+'"></label><label>Mô tả<input id="s_s" value="'+esc(S.sub)+'"></label><div class="row"><button class="pri" id="s_ok">Lưu</button><button id="s_no">Hủy</button></div></div></div>';
+$("s_no").onclick=close;
+$("s_ok").onclick=function(){S.title=$("s_t").value.trim()||"Kho Link";S.sub=$("s_s").value.trim();close();changed()}}
+function openCfg(){
+$("modal").innerHTML='<div class="ov"><div class="box"><h3>Kết nối GitHub</h3><label>Tên tài khoản GitHub<input id="c_o" autocapitalize="off" value="'+esc(cfg.owner)+'"></label><label>Tên kho (repository)<input id="c_r" autocapitalize="off" value="'+esc(cfg.repo)+'"></label><label>Token (mã khóa)<input id="c_t" type="password" autocomplete="off" placeholder="'+(cfg.token?"Đã lưu, để trống nếu giữ nguyên":"github_pat_...")+'"></label><div id="er" style="color:var(--danger);font-size:.85rem"></div><div class="row"><button class="pri" id="c_ok">Kiểm tra &amp; lưu</button><button id="c_no">Hủy</button>'+(cfg.token?'<button class="dng" id="c_del">Xóa kết nối</button>':'')+'</div></div></div>';
+$("c_no").onclick=close;
+if(cfg.token)$("c_del").onclick=function(){cfg.token="";saveCfg();close();msg("Đã xóa kết nối trên trình duyệt này.");draw()};
+$("c_ok").onclick=async function(){var o=$("c_o").value.trim(),r=$("c_r").value.trim(),t=$("c_t").value.trim()||cfg.token;
+if(!o||!r||!t){$("er").textContent="Cần nhập đủ tên tài khoản, tên kho và token.";return}
+var old=Object.assign({},cfg);cfg={owner:o,repo:r,token:t};$("er").style.color="var(--muted)";$("er").textContent="Đang kiểm tra…";
+try{var res=await api("/contents/data.json?t="+Date.now());if(!res.ok)throw new Error(apiErr(res));var meta=await res.json();
+if(!dirty){var rr=await api("/contents/data.json?t="+Date.now(),{raw:true});if(!rr.ok)throw new Error(apiErr(rr));S=norm(JSON.parse(await rr.text()))}
+sha=meta.sha;saveCfg();close();msg("Đã kết nối GitHub.",true);draw()}
+catch(e){cfg=old;$("er").style.color="var(--danger)";$("er").textContent=e.message}}}
+(async function(){
+try{await loadRemote();msg(hasCfg()?"Đã tải dữ liệu từ GitHub.":"Chưa kết nối GitHub. Bấm 🔑 Kết nối GitHub để có thể lưu.",hasCfg())}
+catch(e){msg("Chưa tải được dữ liệu: "+e.message)}
+try{var d=localStorage.getItem("kt_draft");if(d){S=norm(JSON.parse(d));dirty=true;msg("Có bản nháp chưa lưu từ lần trước. Bấm “💾 Lưu lên web” để đăng.")}}catch(e){}
+draw()})();
+</script>
+</body>
+</html>
